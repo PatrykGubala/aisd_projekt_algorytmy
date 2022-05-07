@@ -42,7 +42,7 @@ int main()
             case '1':
 
                 tab= (int*)malloc(sizeof(int) * 1);
-                puts("Czy tablica wstepnie posortowana? 1-tak, 0-nie");
+                puts("Czy tablica wstepnie posortowana?  0-nie, 1-tak, 2-malejąco");
                 scanf(" %c", &input2);
 
 
@@ -52,13 +52,16 @@ int main()
                 else if(input2=='1')
                     readAndSortFile("sorted.txt", tab, &size, insertionSort);
 
+                else if(input2=='2')
+                    readAndSortFile("descending.txt", tab, &size, insertionSort);
+
                 else
                     puts("Podano zla opcje\n");
 
                 break;
             case '2':
                 tab= (int*)malloc(sizeof(int) * 1);
-                puts("Czy tablica wstepnie posortowana? 1-tak, 0-nie");
+                puts("Czy tablica wstepnie posortowana?  0-nie, 1-tak, 2-malejąco");
                 scanf(" %c", &input2);
 
 
@@ -68,13 +71,19 @@ int main()
                 else if(input2=='1')
                     readAndSortFile("sorted.txt", tab, &size, exchangeSort);
 
+                else if(input2=='2')
+                    readAndSortFile("descending.txt", tab, &size, exchangeSort);
+
+
+
+
                 else
                     puts("Podano zla opcje\n");
 
                 break;
             case '3':
                 tab= (int*)malloc(sizeof(int) * 1);
-                puts("czy tablica wstepnie posortowana? 1-tak, 0-nie");
+                puts("Czy tablica wstepnie posortowana?  0-nie, 1-tak, 2-malejąco");
                 scanf(" %c", &input2);
 
 
@@ -84,9 +93,67 @@ int main()
                 else if(input2=='1')
                     readAndSortFile("sorted.txt", tab, &size, selectionSort);
 
+                else if(input2=='2')
+                    readAndSortFile("descending.txt", tab, &size, selectionSort);
+
+
                 else
                     puts("Podano zla opcje\n");
 
+                break;
+
+             case 't':
+
+                tab= (int*)malloc(sizeof(int) * 1);
+                puts("Czy tablica wstepnie posortowana?  0-nie, 1-tak, 2-malejąco");
+                scanf(" %c", &input2);
+                if (input2=='0'){
+                    readAndSortFile("not_sorted.txt", tab, &size, insertionSort);
+                    tab= (int*)malloc(sizeof(int) * 1);
+                    readAndSortFile("not_sorted.txt", tab, &size, exchangeSort);
+                    tab= (int*)malloc(sizeof(int) * 1);
+                    readAndSortFile("not_sorted.txt", tab, &size, selectionSort);
+                }
+                else if (input2=='1'){
+                    readAndSortFile("sorted.txt", tab, &size, insertionSort);
+                    tab= (int*)malloc(sizeof(int) * 1);
+                    readAndSortFile("sorted.txt", tab, &size, exchangeSort);
+                    tab= (int*)malloc(sizeof(int) * 1);
+                    readAndSortFile("sorted.txt", tab, &size, selectionSort);
+                }
+                else if (input2=='2'){
+                    readAndSortFile("descending.txt", tab, &size, insertionSort);
+                    tab= (int*)malloc(sizeof(int) * 1);
+                    readAndSortFile("descending.txt", tab, &size, exchangeSort);
+                    tab= (int*)malloc(sizeof(int) * 1);
+                    readAndSortFile("descending.txt", tab, &size, selectionSort);
+                }
+
+
+
+
+
+
+
+
+            /*
+
+
+
+
+                puts("czy tablica wstepnie posortowana? 1-tak, 0-nie");
+                scanf(" %c", &input2);
+
+
+                if (input2=='0')
+                    readAndSortFile("not_sorted.txt", tab, &size, selectionSort);
+
+                else if(input2=='1')
+                    readAndSortFile("sorted.txt", tab, &size, exchangeSort);
+
+                else
+                    puts("Podano zla opcje\n");
+                */
                 break;
 
            /* case '1':
@@ -266,6 +333,11 @@ int main()
                     almost_sorted_file("sorted.txt",size);
 
                 }
+                 else if(input2=='2')
+                {
+                    descending_order_file("descending.txt",size);
+
+                }
                 else
                     puts("Podano zla opcje");
 
@@ -273,22 +345,7 @@ int main()
 
 
 
-            case 't':
 
-                puts("czy tablica wstepnie posortowana? 1-tak, 0-nie");
-                scanf(" %c", &input2);
-
-
-                if (input2=='0')
-                    readAndSortFile("not_sorted.txt", tab, &size, selectionSort);
-
-                else if(input2=='1')
-                    readAndSortFile("sorted.txt", tab, &size, exchangeSort);
-
-                else
-                    puts("Podano zla opcje\n");
-
-                break;
 
             case 'i':
                 printOptions();
@@ -326,26 +383,42 @@ void swap(int* a, int* b)
 }
 
 
-void insertionSort(int tab[], int n)
+void insertionSort(int tab[], int size)
 {
-    register int i, k, j;
-    for (i = 1; i < n; i++)
-    {
-        k = tab[i];
+
+     double elapsed= 0;
+    long long after = 0 ,before = 0;
+    before = clock();//mierzenie czasu
+    int i, key, j;
+    for (i = 1; i < size; i++) {
+        key = tab[i];
         j = i - 1;
-        while (j >= 0 && tab[j] > k) {
+
+        // Move elements of arr[0..i-1],
+        // that are greater than key to
+        // one position ahead of their
+        // current position
+        while (j >= 0 && tab[j] > key) {
             tab[j + 1] = tab[j];
             j = j - 1;
         }
-        tab[j + 1] = k;
+        tab[j + 1] = key;
     }
+
+    after = clock();
+   elapsed = (double)(after - before) / CLOCKS_PER_SEC;
+    printf("\nCzas sortowania ,%s: %lf\n",__func__, elapsed);
 }
 
-void exchangeSort(int tab[], int n) {
+void exchangeSort(int tab[], int size) {
+
+     double elapsed= 0;
+    long long after = 0 ,before = 0;
+    before = clock();//mierzenie czasu
     int i, j;
-    for (i = 0; i < (n - 1); i++)
+    for (i = 0; i < (size - 1); i++)
     {
-        for (j = (i + 1); j < n; j++)
+        for (j = (i + 1); j < size; j++)
         {
             if (tab[i] > tab[j])// znak zamienia kolejnosc sortowania
             {
@@ -353,20 +426,40 @@ void exchangeSort(int tab[], int n) {
             }
         }
     }
+
+    after = clock();
+   elapsed = (double)(after - before) / CLOCKS_PER_SEC;
+    printf("\nCzas sortowania ,%s: %lf\n",__func__, elapsed);
+
 }
 
-void selectionSort(int* tab, int n)
+void selectionSort(int tab[], int size)
 {
-    int i, j, k;
-    for (i = 0; i < n; i++) {
-        k = i;
-        for (j = i + 1; j < n; j++)
-            if (tab[j] < tab[k])
-                k = j;
-        swap(&tab[k], &tab[i]);
-    }
-}
 
+    double elapsed= 0;
+    long long after = 0 ,before = 0;
+    before = clock();//mierzenie czasu
+    int i, j, min_idx;
+    for (i = 0; i < size - 1; i++) {
+
+
+        min_idx = i;
+        for (j = i + 1; j < size; j++)
+            if (tab[j] < tab[min_idx])
+                min_idx = j;
+
+
+        swap(&tab[min_idx], &tab[i]);
+    }
+    after = clock();
+   elapsed = (double)(after - before) / CLOCKS_PER_SEC;
+    printf("\nCzas sortowania ,%s: %lf\n",__func__, elapsed);
+
+
+
+
+
+}
 
 
 void printArray(int* tab, int size)
@@ -405,9 +498,9 @@ void fullfillRandFile(char* output, int n)
     FILE* fp = fopen(output, "w");
     fprintf(fp, "SIZE: %d\n", n);
     register int i = 0;
-    srand(time(0));
-    for (i; i < n; i++)
-        fprintf(fp, "%d ", rand() % 201 - 100);
+    srand(time(NULL));
+    for (; i < n; i++)
+        fprintf(fp, "%d ", rand()% 201 - 100);
 
     printf("\n");
 
@@ -444,11 +537,39 @@ void almost_sorted_file(char* output, int size)//tablica z 1% nieposortowanych
 }
 
 
+void descending_order_file(char* output, int size)//tablica z 1% nieposortowanych
+{
+    FILE* fp = fopen(output, "w");
+    fprintf(fp, "SIZE: %d\n", size);
+    register int i = 0, j= 0;
+    srand(time(0));
+
+
+
+    int k=size/100;
+    for (i,j=100; i<size;i++)
+    {
+        if (i==k){
+            fprintf(fp, "%d ", j);
+            j-=2;
+            k+=size/100;
+        }
+        else {
+            fprintf(fp, "%d ", j);
+        }
+
+    }
+    printf("\n");
+
+
+    fclose(fp);
+
+}
+
+
 
 void readAndSortFile( char* output,  int *tab, int *size, void (*operation)(int *, int))
 {
-    double elapsed= 0;
-    long long after ,before ;
 
     FILE* fp = fopen(output, "r");
     fseek(fp, 0, SEEK_SET);
@@ -464,16 +585,14 @@ void readAndSortFile( char* output,  int *tab, int *size, void (*operation)(int 
     for (i=0; i < *size; i++) {
         fscanf(fp, "%d", &value);
         tab[i]=value;
-            printf("%d ", tab[i]);
+            //printf("%d ", tab[i]);
 
     }
 
 
-    before = clock();//mierzenie czasu
+
     operation(tab, *size);
-    after = clock();
-   elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-    printf("\nCzas sortowania: %lf\n", elapsed);
+
 
 
 

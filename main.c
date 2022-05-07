@@ -23,7 +23,7 @@ int main()
 
     int* tab;
 
-                tab= (int*)malloc(sizeof(int) * 1);
+    tab= (int*)malloc(sizeof(int) * 1);
 
 
 
@@ -42,7 +42,7 @@ int main()
             case '1':
 
                 tab= (int*)malloc(sizeof(int) * 1);
-                puts("Czy tablica wstepnie posortowana?  0-nie, 1-tak, 2-malejąco");
+                printSecondOptions();
                 scanf(" %c", &input2);
 
 
@@ -61,7 +61,7 @@ int main()
                 break;
             case '2':
                 tab= (int*)malloc(sizeof(int) * 1);
-                puts("Czy tablica wstepnie posortowana?  0-nie, 1-tak, 2-malejąco");
+                printSecondOptions();
                 scanf(" %c", &input2);
 
 
@@ -83,7 +83,7 @@ int main()
                 break;
             case '3':
                 tab= (int*)malloc(sizeof(int) * 1);
-                puts("Czy tablica wstepnie posortowana?  0-nie, 1-tak, 2-malejąco");
+                printSecondOptions();
                 scanf(" %c", &input2);
 
 
@@ -105,7 +105,7 @@ int main()
              case 't':
 
                 tab= (int*)malloc(sizeof(int) * 1);
-                puts("Czy tablica wstepnie posortowana?  0-nie, 1-tak, 2-malejąco");
+                printSecondOptions();
                 scanf(" %c", &input2);
                 if (input2=='0'){
                     readAndSortFile("not_sorted.txt", tab, &size, insertionSort);
@@ -136,191 +136,13 @@ int main()
 
 
 
-            /*
-
-
-
-
-                puts("czy tablica wstepnie posortowana? 1-tak, 0-nie");
-                scanf(" %c", &input2);
-
-
-                if (input2=='0')
-                    readAndSortFile("not_sorted.txt", tab, &size, selectionSort);
-
-                else if(input2=='1')
-                    readAndSortFile("sorted.txt", tab, &size, exchangeSort);
-
-                else
-                    puts("Podano zla opcje\n");
-                */
                 break;
 
-           /* case '1':
-                puts("\nPodaj liczbe elementow w tablicy:(100000 max (powyzej trwa wiecej niz 10 sekund)");
-                scanf(" %d", &size);
-                puts("czy tablica wstepnie posortowana? 1-tak, 0-nie");
-                scanf(" %c", &input2);
-                if (input2=='0')
-                {
-                    tmp = (int *) realloc(tab, sizeof(int) * size);
 
-                    if (tmp != NULL)
-                    {
-                        tab = tmp;
-                        fullfillArray(tab, size);
-                        before = clock();//mierzenie czasu
-                        insertionSort(tab, size);
-                        after = clock();
-                        printArray(tab, size);
-                        elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-                        printf("Czas sortowania: %lf\n", elapsed);
-
-                    }
-
-                    else
-                        puts("przydzielenie pamieci nie powiodlo sie");
-
-                }
-                else if(input2=='1')
-                {
-                     tmp = (int *) realloc(tab, sizeof(int) * size);
-
-                    if (tmp != NULL)
-                    {
-                        tab = tmp;
-                        fullfillArray(tab, size);
-                        almost_sorted_tab(tab,size);
-                        before = clock();//mierzenie czasu
-                        insertionSort(tab, size);
-                        after = clock();
-                        printArray(tab, size);
-                        elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-                        printf("Czas sortowania: %lf\n", elapsed);
-
-                    }
-
-                    else
-                        puts("przydzielenie pamiêci nie powiodlo sie");
-
-                }
-                else
-                    puts("Podano zla opcje");
-
-                break;
-            case '2':
-                puts("\nPodaj liczbe elementow w tablicy:(100000 max powyzej trwa wiecej niz 10 sekund)");
-                scanf(" %d", &size);
-                puts("czy tablica wstepnie posortowana? 1-tak, 0-nie");
-                scanf(" %c", &input2);
-                if (input2=='0')
-                {
-                    tmp = (int *) realloc(tab, sizeof(int) * size);
-
-                    if (tmp != NULL)
-                    {
-                        tab = tmp;
-                        fullfillArray(tab, size);
-                        before = clock();//mierzenie czasu
-                        exchangeSort(tab, size);
-                        after = clock();
-                        printArray(tab, size);
-                        elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-                        printf("Czas sortowania: %lf\n", elapsed);
-
-                    }
-
-                    else
-                        puts("przydzielenie pamiêci nie powiodlo sie");
-
-                }
-                else if(input2=='1')
-                {
-                     tmp = (int *) realloc(tab, sizeof(int) * size);
-
-                    if (tmp != NULL)
-                    {
-                        tab = tmp;
-                        fullfillArray(tab, size);
-                        almost_sorted_tab(tab,size);
-                        before = clock();//mierzenie czasu
-                        exchangeSort(tab, size);
-                        after = clock();
-                        printArray(tab, size);
-                        elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-                        printf("Czas sortowania: %lf\n", elapsed);
-
-                    }
-
-                    else
-                        puts("przydzielenie pamiêci nie powiodlo sie");
-
-                }
-                else
-                    puts("Podano zla opcje");
-
-                break;
-            case '3':
-                 puts("\nPodaj liczbe elementow w tablicy:(100000 max powyzej trwa wiecej niz 10 sekund)");
-                scanf(" %d", &size);
-                puts("czy tablica wstepnie posortowana? 1-tak, 0-nie");
-                scanf(" %c", &input2);
-                if (input2=='0')
-                {
-                    tmp = (int *) realloc(tab, sizeof(int) * size);
-
-                    if (tmp != NULL)
-                    {
-                        tab = tmp;
-                        fullfillArray(tab, size);
-                        before = clock();//mierzenie czasu
-                        selectionSort(tab, size);
-                        after = clock();
-                        printArray(tab, size);
-                        elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-                        printf("Czas sortowania: %lf\n", elapsed);
-
-                    }
-
-                    else
-                        puts("przydzielenie pamiêci nie powiodlo sie");
-
-                }
-                else if(input2=='1')
-                {
-                     tmp = (int *) realloc(tab, sizeof(int) * size);
-
-                    if (tmp != NULL)
-                    {
-                        tab = tmp;
-                        fullfillArray(tab, size);
-                        almost_sorted_tab(tab,size);
-                        before = clock();//mierzenie czasu
-                        selectionSort(tab, size);
-                        after = clock();
-                        printArray(tab, size);
-                        elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-                        printf("Czas sortowania: %lf\n", elapsed);
-
-                    }
-
-                    else
-                        puts("przydzielenie pamiêci nie powiodlo sie");
-
-                }
-                else
-                    puts("Podano zla opcje");
-
-                break;
-
-            case 'i':
-                puts("'i'-Lista instrukcji 'n'-nowa tablica '0'- wyjscie z programu, '1'-insertionSort, '2'- exchangeSort, '3'- selectionSort\n");
-                break;
-            */
             case 'n':
                 puts("\nPodaj liczbe elementow w tablicy:(100000 max powyzej trwa wiecej niz 10 sekund)");
                 scanf(" %d", &size);
-                puts("czy tablica wstepnie posortowana? 1-tak, 0-nie");
+                printSecondOptions();
                 scanf(" %c", &input2);
                 if (input2=='0')
                 {
@@ -386,18 +208,13 @@ void swap(int* a, int* b)
 void insertionSort(int tab[], int size)
 {
 
-     double elapsed= 0;
+    double elapsed= 0;
     long long after = 0 ,before = 0;
     before = clock();//mierzenie czasu
     int i, key, j;
     for (i = 1; i < size; i++) {
         key = tab[i];
         j = i - 1;
-
-        // Move elements of arr[0..i-1],
-        // that are greater than key to
-        // one position ahead of their
-        // current position
         while (j >= 0 && tab[j] > key) {
             tab[j + 1] = tab[j];
             j = j - 1;
@@ -407,12 +224,12 @@ void insertionSort(int tab[], int size)
 
     after = clock();
    elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-    printf("\nCzas sortowania ,%s: %lf\n",__func__, elapsed);
+    printf("\nCzas sortowania %s: %lf\n",__func__, elapsed);
 }
 
 void exchangeSort(int tab[], int size) {
 
-     double elapsed= 0;
+    double elapsed= 0;
     long long after = 0 ,before = 0;
     before = clock();//mierzenie czasu
     int i, j;
@@ -428,8 +245,8 @@ void exchangeSort(int tab[], int size) {
     }
 
     after = clock();
-   elapsed = (double)(after - before) / CLOCKS_PER_SEC;
-    printf("\nCzas sortowania ,%s: %lf\n",__func__, elapsed);
+    elapsed = (double)(after - before) / CLOCKS_PER_SEC;
+    printf("\nCzas sortowania %s: %lf\n",__func__, elapsed);
 
 }
 
@@ -622,5 +439,10 @@ void printOptions()
     printf("'i' - wyswietl opcje do wyboru\n");
 }
 
-
+void printSecondOptions()
+{
+    printf("'0' - tablica nieposortowana\n");
+    printf("'1' - tablica posortowana (1 procent elementow nieposortowanych)\n");
+    printf("'2' - tablica posortowana malejąco\n");
+}
 
